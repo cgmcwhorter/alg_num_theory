@@ -1,1 +1,4 @@
-# alg_num_theory
+Algebraic Number Theory
+====
+
+Notes from Ted Chinburg's website.
