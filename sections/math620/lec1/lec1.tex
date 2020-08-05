@@ -1,3 +1,138 @@
 % !TEX root = ../../../alg_num_theory.tex
+% 9 - 09 - 2009
 \newpage
 \subsection{Algebraic Numbers \& Integers\label{sec:620_1}}
+
+\begin{dfn}[Algebraic Number/Integer]
+$\alpha \in \C$ is an algebraic number (respectively, algebraic integer) if $\alpha$ is the root of an equation
+	\[
+	x^n + a_{n-1} x^{n-1} + \cdots + a_0= 0
+	\] 
+for some $n \geq 1$ and some $a_i \in \Q$ (respectively, $a_i \in \Z$). If $\alpha$ is not algebraic, we say that $\alpha$ is transcendental. 
+\end{dfn}
+
+\begin{ex} \hfill
+\begin{enumerate}[(i)]
+\item $\sqrt{2}$ is an algebraic integer as it satisfies $x^2-2=0$.
+\item $\frac{\sqrt{2}}{2}$ is an algebraic number but not an algebraic integer.
+\item $\alpha=e^{2\pi i/n}$, the cyclotomic integers, is an algebraic integer: $x^n-1=0$.
+\end{enumerate}
+\end{ex}
+
+\tb The number of algebraic numbers is countable (the countable union of countable sets is countable). So `most' numbers are transcendental. However, how can you tell if a particular number is algebraic or transcendental? 
+
+\begin{thm}[Liouville]
+Suppose $\alpha \in \R$ is algebraic of degree $n>1$ so that
+	\[
+	\alpha^n + a_{n-1} \alpha^{n-1} + \cdots + a_0 = 0
+	\]
+for some $a_i \in \Q$. Then for all constants $C>0$ and $\ep >0$, there are only finitely many rationals $p/q$ with $p,q \in \Z$ so that
+	\[
+	\left| \alpha - \dfrac{p}{q} \right| < \dfrac{C}{q^{nt+\ep}}
+	\]
+\end{thm}
+
+\tb Moral: Algebraic numbers are hard to approximate using rationals. If $\alpha$ does have infinitely many `good' rational approximations, then it is transcendental. \\
+
+\tb This theorem is great at producing transcendental numbers and is the moral behind most transcendence proofs. 
+
+\begin{ex}
+The Liouville number: $\alpha= \sum 10^{-n!}$. Look at $p_i/q_i=\dfrac{\sum_{n=1}^i 10^{i!-n!}}{10^{i!}}$. 
+	\[
+	|\alpha - p_i/q_i| = \sum_{n>i}^\infty \dfrac{1}{10^{n!}} 
+	\]
+Generally, take an integer $b \geq 2$ and sequence $(a_1,a_2,\ldots)$ with $a_k \in \{0,\ldots,b-1\}$ with infinitely many nonzero and then $x= \sum_{k=1}^\infty a_k/b^{k!}$. The above is the special case of $b=10$ and $a_k=1$. Generally, letting $q_n=b^{n!}$ and $p_n=q_n \sum_{k=1}^n a_k/b^{k!}$
+	\[
+	0<\left| x- \dfrac{p_n}{q_n}\right| = \sum_{k=n+1}^\infty \dfrac{a_k}{b^{k!}} \leq \sum_{k=n+1}^\infty \dfrac{b-1}{b^{k!}} < \sum_{k=(n+1)!}^\infty \dfrac{b-1}{b^k} = \dfrac{b-1}{b^{(n+1)!}} \sum_{k=0}^\infty \dfrac{1}{b^k} \leq \dfrac{b-1}{b^{(n+1)!}} \cdot \dfrac{b}{b-1}= \dfrac{b}{b^{(n+1)!}} \leq \dfrac{b^{n!}}{b^(n+1)!} = \dfrac{1}{q_n^n}
+	\]
+where we have used $n \cdot n!=n \cdot n! + n! - n! = (n+1)!-n!$. In particular, all these numbers are irrational and transcendental. Generally, a Liouville number is an irrational number $\alpha$ with the property that for each positive integer $n$, there are $p,q$, with $q>1$ such that $0<|x-p/q|< 1/q^n$.
+\end{ex}
+
+\begin{thm}[Hermite, 1878]
+$e$ is transcendental. 
+\end{thm}
+
+\begin{thm}[Lindemann, 1882]
+$\pi$ is transcendental. 
+\end{thm}
+
+A good reference for these proofs is Hardy and Wright ``Theory of Numbers''. 
+
+\begin{thm}[Roth's Theorem, 1952]
+If $\alpha$ is algebraic of degree $>1$ and if $\ep>0$, 
+	\[
+	\left| \alpha - \dfrac{p}{q} \right| < \dfrac{1}{q^{2+\ep}}
+	\]
+has finitely many solutions in integer $p,q$.
+\end{thm}
+
+\tb This was first conjectured by Siegel from work by Thue. The proof is ineffective in that it gives no bounds on $p,q$. Roth won the fields medal because of this work. Roth was supposed to pass his qualifying exams but was a nervous person. So he was told to take a practice test (which turned out to be the real test). He also got into many arguments with Serge Lang and once wrote a terrible book review for him. \\
+
+\begin{thm}[Gelfond-Schneider, 1934]
+If $\alpha,\beta$ are algebraic with $\alpha \notin \{0,1\}$ and $\beta$ is not rational, then $\alpha^\beta$ is transcendental. 
+\end{thm}
+
+\tb We need that $a,b$ be algebraic as $(\sqrt{2}^{\sqrt{2}})^{\sqrt{2}}=2$. In fact, $2^{\sqrt{2}}$ is called the Gelfond-Schneider constant. Gelfond's constant is $e^\pi$ as well as $i^i$. Take $(-1)^i=(e^{\pi i})^i = e^{\pi}$. \\
+
+\begin{thm}[Baker]
+If $\beta_1,\beta_2,\alpha_1,\alpha_2$ are algebraic, then either $\beta_1!\log \alpha_1 + \beta_2 \log \alpha_2=0$ or there is a compatible lower bound for $|\beta_1\log\alpha_1+\beta_2\log\alpha_2|$ in terms of the sizes of the coefficients in the equation for the $\alpha_i$ and $\beta_j$. 
+\end{thm}
+
+\tb Baker also won the Fields Medal. This result later was used to prove the class number 1 problem. Stark later gave another solution to the class number 1 problem. But both later learned that an Electrical Engineer named Heeger first solved it but no one believed the proof (it was written oddly). 
+
+\begin{thm}[Ap\'ery]
+$\zeta(3)$ is irrational. 
+\end{thm}
+
+\tb $\zeta(3)$ is Ap\'ery's constant. $\zeta(3) \approx 1.202$. This is conjectured to be transcendental. For even integers, $\zeta(n)$ is known to be a rational multiple of a power of $\pi$. 
+
+\tb Integrality generalizes the notion of an algebraic number.
+
+\begin{dfn}[Integral]
+If $A \subseteq R$ are commutative rings (which are always assumed to have identity), then $x \in R$ is said to be integral over $A$ if it satisfies a monic polynomial with coefficients in $A$. 
+\end{dfn}
+
+\begin{ex}\hfill
+\begin{enumerate}[(i)]
+\item $A=\Q$ and $R=\C$: $\alpha$ is integral over $\Q$ if and only if $\alpha$ is an algebraic number.
+\item $A=\Z$ and $R=\C$: $\alpha$ is integral over $\Q$ if and only if $\alpha$ is an algebraic integer.
+\item $A=F[k]$ and $R=F[u,v]/F[u,v]f$, where $f=v^n+a_{n-1}v^{n-1}+\cdots a_0$ with $a_i \in A$. Then $R$ is the affine ring of the plane curve defined by setting $f=f(u,v)=0$. Then $x=v$ is integral over $A$.
+\end{enumerate}
+\end{ex}
+
+\begin{thm}
+Suppose $A \subseteq R$ commutative rings and $x \in R$. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $x$ is integral over $A$
+\item the subring $\langle A,x \rangle$ of $R$ is finitely generated $A$-module. 
+\item There is a subring $B\subseteq R$ such that $A \subseteq B$, $x \in B$, and $B$ is a finitely generated $A$-module. 
+\end{enumerate}
+\end{thm}
+
+\pf
+\begin{enumerate}
+\item[$1 \to 2$] If $x^n+a_{n-1}x^{n-1}+\cdots+a_0=0$. Then $\langle A,x\rangle$ is generated as an $A$-module by $1,x,\ldots,x^{n-1}$. [Need identity]. 
+\item[$2 \to 3$] Obvious, $B=\langle A,x\rangle$.
+\item[$3 \to 1$] Suppose $B$ as given in the theorem statement. Suppose $B$ is generated by $w_1,\ldots,w_n$ as an $A$--submodule of $R$, i.e. $B=Aw_1 + \cdots + A w_n \subseteq R$. Now $xB \subseteq B$. Therefore,
+	\[
+	\begin{split}
+	xw_1&= a_{1,1}w_1 + \cdots + a_{1,n} w_n \\
+	xw_2&=a_{2,1}w_1 + \cdots + a_{2,n} w_n \\
+	       \vdots &= \vdots \\
+	xw_n &= a_{n,1} w_1 + \cdots + a_{n,n} w_n      
+	\end{split}
+	\]
+Writing this in matrix form, we have $M=xI_n - (a_{ij})$ and $M m_j=0$, where $m_j$ is the vector with 0's everywhere except the $j$th spot. Therefore, we have $\text{cof}(M)^T M=\det M I_n$ kills $B$: wow $\det M \in R$ and $\det M \cdot w_j =0$. But $1 \in B$! Then $\det M=0$ so that $x$ satisfies the polynomial equation given by the determinant. This resulting polynomial is degree $n$ and is monic. \qed \\
+\end{enumerate}
+
+\tb This final criterion is very useful as the proof gives an algorithm for finding the equation the element $x$ satisfies. Note then any finitely generated commutative ring containing the given commutative ring is integral over the ring. 
+
+\tb Above, we only need commutative, not even integral domains. The rings could have zero divisors or nilpotents. What happens if $R$ is not commutative? What happens in the above cases? What if $R$ is not commutative but $A \subseteq Z(R)$?
+
+\begin{cor}
+If $A \subseteq R$ are commutative rings, the set $A'$ of $x \in R$ which are integral over $A$ is a subring of $R$. The subring $A'$ is called the integral closure of $A$ in $R$.
+\end{cor}
+
+\pf Say $x,y \in A'$ and $B_x=\langle A,x \rangle$, $B_y=\langle A,y \rangle$. Say the polynomial equation $x,y$ satisfy are of degree $n,m$, respectively. Then $\{x^i y^j\}_{1\leq i,j \leq \max\{n,m\}}$ certainly generates everything in $\langle A,x,y \rangle$. But then taking this to be $B$, we see $A \subseteq B \subseteq R$ and $B$ is finitely generated so that $x \pm y$ and $xy$, $rx$ are all in $A'$. Then $A'$ is a subring. \qed \\
+
+\tb We say that $R/A$ is integral if every element of $R$ is integral over $A$. 

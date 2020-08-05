@@ -1,3 +1,73 @@
 % !TEX root = ../../../alg_num_theory.tex
+% 9 - 14 - 2009
 \newpage
 \subsection{Norms/Traces, Integral Closures, Prime Ideals\label{sec:620_2}}
+
+\tb Think about the analogy $\Z \subseteq \Q \subseteq \R$ and $k[1/x] \subseteq k(x)=k(x^{-1}) \subseteq k(\!(x)\!)$. How far does this analogy go? These lead to the Vojta Conjectures.
+
+
+\begin{prop}
+Suppose $A \subseteq R \subseteq C$ with $R/A$ integral and $C/R$ integral. Then $C/A$ is integral. 
+\end{prop}
+
+\pf Take $\alpha \in C$. Then $\alpha^n + r_{n-1} \alpha^{n-1} + \cdots+ r_0$ for some $r_i \in R$. Each $r_i$ is integral and $A\langle r_i \rangle = A+ Ar_i+Ar_i^2+\cdots+Ar_i^{\deg r_i}$ is a subring of $R$. To show $C$ is integral over $A$, we only need find a subring $B \subseteq C$, finitely generated as an $A$--module so $\alpha \in B \supseteq A$. Taking $B=A \langle \{r_i\}_i,\alpha \rangle$ completes the proof. \qed \\
+
+
+\tb Suppose $A$ is a commutative noetherian ring and $A$ is integrally closed in $F=\Frac A$. Let $L/F$ be a finite extension of fields. Let $A'$ denote the integral closure of $A$ in $L$. 
+	\[
+	\begin{tikzcd}
+	 A' \arrow[draw=none]{d}[sloped,auto=false]{\supseteq} \arrow[draw=none]{r}[sloped,auto=false]{\subseteq} & L \arrow[dash]{d} \\
+	A \arrow[draw=none]{r}[sloped,auto=false]{\subseteq} & F=\Frac A
+	\end{tikzcd}
+	\]
+When is $A'$ finitely generated as an $A$--module? If $L/F$ is in separable, $A'$ need not be finitely generated. The case we will be interested in is when $L$ is a number field ($A=\Z$, $F=\Frac A=\Q$, and then $L$ is a number field). The proof will give a method of writing down the ring of integers in an arbitrary number field. 
+
+\begin{thm}
+In the notation above, $A'$ is finitely generated if $L/F$ is separable (every $\beta \in L$ is the root of a polynomial in $F[x]$ without multiple roots). 
+\end{thm}
+
+\begin{cor}
+In the notation above, if the characteristic of $F$ is 0, $A'$ is always finitely generated as an $A$--module. 
+\end{cor}
+
+We will need to make use of norms and traces. Take $L/F$ a finite extension of fields. Since $L$ is finitely generated, $L$ is algebraic over $F$. Let $\{b_i\}_{i=1}^n$ be a basis for $L$ over $F$. Then the embedding multiplication by $\alpha \in L$ to $L$ gives an action of $F$-algebras. Then we get a matrix representation for this action, $\psi_L(\alpha)$. Note that the determinant and trace will be well defined as these are invariant of choice of basis: $\tr(AMA^{-1})=\tr M$ and $\det(AMA^{-1})=\det M$. Define $\tr_{L/F}(\alpha)=\tr(\psi_L(\alpha)) \in F$ and $\Nm{L/F}=\det(\psi_L(x)) \in F$ and $\text{char poly}(\psi_L(\alpha))=\det(xI_n - \psi_L(\alpha)) \in F[x]$.
+
+\begin{dfn}[Conjugates]
+The conjugates of $\alpha$ in $L$ are the images $\alpha_i=\sigma_i(x)$ of the embeddings $\sigma_i: L \to \ov{F}$ for some fixed algebraic closure of $F$. 
+\end{dfn}
+
+Now given the irreducible polynomial for $\alpha$ over $F$. Either this polynomial is separable (which is always the case for characteristic 0) or is inseparable. In the case of $\char p$, then this polynomial is of the form $f(x^{p^r})$ for some separable polynomial $f$. Let $y=\alpha^{p^r}$. Then the irreducible polynomial for $y$ over $F$ is $f$. Now $f(x)=\prod_{\sigma_i: F(\alpha) \to \ov{F}} (x-\sigma_i(y))=\prod_i (x-\sigma_i(\alpha)^{p^r})$. Now as an extension $F(y)=F(\alpha^{p^r})/F$, if you look at the number of embeddings of this field into an algebraic closure, its the degree of the extension as this is a separable extension. Whereas you extend these to $F(\alpha)$, each of these can be extended uniquely to an algebraic closure because $F(\alpha)/F(\alpha^{p^r})$ is a purely inseparable extension: so when you look at an extension of $F(\alpha^{p^r})$ to $F(\alpha)$, there is a unique way to extend this to $\ov{F}$. [There is only one $p^r$th root of $\alpha$ in $p^r$ as any other root would differ by a $p^r$th root of unity and the field has characteristic $p$.]
+	\[
+	\begin{tikzcd}
+	& \ov{F} & \\
+	F(\alpha) \arrow{ur} & & F(y)=F(\alpha^{p^r}) \arrow{ul} \arrow{ll} \\
+	& F \arrow{ul} \arrow{ur} & 
+	\end{tikzcd}
+	\]
+Then the number of embeddings of $F(\alpha) \to \ov{F}$ over $F$ is $[F(\alpha):F]_\text{sep}=[F(\alpha^{p^r}:F]=d$. [Recall the separable degree is the number of different embeddings of a field into an algebraic closure.] 
+
+\begin{thm} Let $L/F$ be a finite extension.
+\begin{enumerate}[(a)]
+\item $\Nm{L/F}(x)= \left(\prod_{i=1}^d \sigma_i \right)^{p^r  [L:F(\alpha)]}$
+\item $\Tr{L/F}(\alpha)= p^r \,[L:F(\alpha)] \cdot \sum_{i=1}^d \sigma_i(\alpha)$ 
+\item $\text{char poly}_F(\alpha)=f(x^{p^r})^{[L:F(\alpha)]}$
+\end{enumerate}
+\end{thm}
+
+\begin{rem}
+$\Tr{L/F}$ is identically 0 if $L/F$ is not separable: either $F(\alpha)$ is inseparable over $F$ in which case $p^r$ is a positive power of $p$ or else $F(\alpha)$ is separable but then a $p$ is produced from $[L:F(\alpha)]$. It is possible to have a degree $p$ separable extension in fields of characteristic $p$. Note that above (c) implies (a) and (b) since $f(x)=\prod_{i=1}^d (x-\sigma_i(\alpha))$. Remember, we can get these values by looking at the constant term of the minimal polynomial and the coefficient of $x^{[L:F]-1}$. 
+\end{rem}
+
+\pf We only need show (c). $L$ is a $F$ and $F(\alpha)$ vector space. As a $F(\alpha)$-vector space, $L$ decomposes as $L=F(\alpha)r_1 \oplus \cdots \oplus F(\alpha) r_s$, where $s=[L:F(\alpha)]$. Left multiplication by $\alpha$ over $L$ preserves the summands. The action of $\alpha$ on $F(\alpha)$ is determined solely based on its action on $f(\alpha)$. So the matrix representation of the multiplication is a block matrix along the diagonal with each block is the action of $\alpha$ on each $F(\alpha)$ relative to some basis. Then $\text{char poly}_F(\alpha \text{ acting on }L)=\text{char poly}_F(\alpha \text{ on }F(\alpha))^s$ but $s=[L:F(\alpha)]$. Now we have reduced to the case $L=F(\alpha)$. Now write $L=F(\alpha)$ has $F$ basis $1,\alpha,\alpha^2,\ldots,\alpha^{p^r-1},\alpha^{p^r}=y,\alpha y,\alpha^2y,\ldots,\alpha^{p^r-1}y,y^2,\ldots,\alpha^{p^r-1} y^{d-1}$, where $d=\deg_F(y)=\deg f(x)$ -- the separable degree, $=[F(\alpha^{p^r}):F]=[F(y):F]$. Now $f(x)=\prod_{i=1}^d (x-\sigma_i(\alpha))= x^d + c_{d-1} x^{d-1} + \cdots + c_0$. The matrix of multiplication by $\alpha$ with this basis is
+	\[
+	M=
+	\begin{pmatrix}
+	0 & 0 & 0 & \cdots & 0 & -c_0 \\
+	1 & 0 & 0 & \cdots & 0 & 0 \\
+	0 & 1 & 0 & \cdots & 0 & \vdots \\
+	 &  \ddots &  &  & \vdots & 0 \\
+	 &  & \ddots &  & 0 & -c_1 \\
+	 &  &  &  & \ddots & \vdots \\
+	\end{pmatrix}
+	\] %c_1 happens in the 1+p^r spot
+Now we want $\det(xI-M)=F(x^{p^r})$; we assumed $L=F(\alpha)$. Now simply expand this matrix by cofactors along the last column -- begin careful of the book keeping. \qed \\

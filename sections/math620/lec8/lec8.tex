@@ -1,3 +1,168 @@
 % !TEX root = ../../../alg_num_theory.tex
+% 10 - 05 - 2009
 \newpage
 \subsection{Decomposition of Primes in Galois Extensions \& DVRs\label{sec:620_8}}
+
+\begin{lem}
+Let $A$ be a Dedekind ring. For all multiplicatively closed sets $S$ of $A$, $S^{-1}A$ is either a field or a Dedekind ring. In all cases, there is a bijection between $\Spec(S^{-1}A)$ and $\{P \in \Spec A \colon S \cap P =\emptyset\}$.
+\end{lem}
+
+\pf For all ideals $J$ of $S^{-1}A$, $J=S^{-1}(J \cap A)$ since each element of $J$ has the form $j/s$ for some $j \in J \cap A$, $s \in S$. Now $S^{-1}A$ is noetherian, since if $J$ is an ideal of $S^{-1}A$, $J \cap A$ is a finitely generated $A$ ideal as $A$ is noetherian. To show $S^{-1}A$ is algebraically closed in $F=\Frac(S^{-1}A)=\Frac(A)$. If $\alpha \in F$ is integral over $S^{-1}A$, we have $\alpha^m+ \frac{b_{m-1}}{s_{m-1}} \alpha^{n-1}+\cdots+\frac{b_0}{s_0}=0$ for some $b_i \in A$, $s_i \in S$. Then $(\prod_{i=1}^n s_i) \alpha$ is integral over $A$ by clearing denominators. But then this is in $A$ so that $\alpha \in S^{-1}A$ is integrally closed. Finally, we need to see all nonzero primes are maximal. Let $Q$ be a nonzero prime ideal of $S^{-1}A$. Then $Q=S^{-1}(Q \cap A)$. Now $Q \cap A$ is an ideal of $A$ but it must be proper since $Q \neq S^{-1}A$. Therefore, $Q \cap A$ is a prime ideal as $Q$ is prime. Since $0 \neq Q$, we know $Q \cap A \neq 0$. But then $Q \cap A$ is a nonzero prime ideal and hence $Q \cap A$ must be maximal. Then $S \cap (Q \cap A) =\emptyset$ as $s \in S \cap S \cap (Q \cap A)$ implies $1=\frac{s}{s} \in S^{-1}(Q \cap A)= Q$. 
+
+Look at the field $L=A/(Q \cap A)$. We have 
+	\[
+	\lambda: L= A/(Q \cap A) \ma{} \dfrac{S^{-1}A}{S^{-1}(Q \cap A)}
+	\]
+Now $L$ is a quotient of $A$ and we have a diagram
+	\[
+	\begin{tikzcd}
+	\phantom{x} & S \arrow[draw=none]{r}[sloped,auto=false]{\subseteq} \arrow{d} & A \arrow{d} & \\
+	L^*=L\setminus \{0\} \arrow[draw=none]{r}[sloped,auto=false]{\supseteq} & \overline{S} \arrow[draw=none]{r}[sloped,auto=false]{\subseteq} & L = A/(Q \cap A ) \arrow{r} & \dfrac{S^{-1} A}{S^{-1}(Q \cap A)}
+	\end{tikzcd}
+	\]
+so that $S$ maps to the invertible elements in the residue field. Then the map $\lambda$ is surjective since every element of $S$ is invertible in the field $A/(Q \cap A)$. But then this is a surjection of a field into a nonzero ring, hence $\lambda$ is an isomorphism. Therefore, $S^{-1}(Q \cap A)$ is maximal. Lastly, we must show that $S^{-1}A$ has a nonzero prime. If $S^{-1}A$ is not a field, then there is a nonzero maximal ideal so that $S^{-1}A$ is Dedekind. 
+
+We now need to show the bijection portion of the Lemma. Take the map $P \mapsto S^{-1}P$ from $\{P \in \Spec A \colon S \cap P =\emptyset\}$ to $\Spec(S^{-1}A)$. This map is clearly surjective since for $Q \in \Spec(S^{-1}A)$, we know $P= A \cap Q$ is in $\{P \in \Spec A \colon S \cap P =\emptyset\}$ and $S^{-1}(A \cap Q)=Q$. For injectivity, if $S^{-1}P=S^{-1}P'$, where $P,P' \in \{P \in \Spec A \colon S \cap P =\emptyset\}$, then $P \subseteq A \cap S^{-1}P$. Define $Q=S^{-1}P$. If $P$ is nonzero, then it is maximal so $P=A \cap Q$. If $P=\{0\}$, then $Q=S^{-1}P=\{0\}$. If $P=\{0\}$ or $P'=\{0\}$, we have $Q=\{0\}$. Otherwise, $P= A \cap Q=P'$. Hence, we have a bijection. \qed \\
+
+
+This gives that the localization at prime ideals are DVRs (by definition, local PIDs). [All DVRs are Dedekind.] 	
+
+\begin{cor}
+If $S=A \setminus P$ for $P \in \Spec A$, then $S^{-1}A=A_P$ is a discrete valuation ring (DVR) that are not fields. 
+\end{cor}	
+	
+\pf The nonzero prime ideals of $S^{-1}A=A_P$ are $\{S^{-1} J \colon 0 \neq J \in \Spec A, J \cap S = \emptyset\}$. Here $S=A \setminus P$ so that $J \cap S=\emptyset$ if and only if $J \subseteq P=A \setminus S$. But $A$ is Dedekind so $J$ must be maximal. Then it must be that $J=P$. Then the unique nonzero prime ideals of $S^{-1}A=A_P$ is $S^{-1}P$. Therefore, $A_P$ is local. 
+
+Call the unique maximal ideal $\m_P$. By unique factorization of fractional ideals in the Dedekind ring $A_P$, we know $\m_P \neq \m_P^2$. Note that $A_P \pi \subseteq \m_P$ but $A_P \pi \not\subseteq \m_P^2$. We know that $A_P\pi$ is a product of powers of prime ideals of $A_P$. Then it must be that $A_P\pi = \m_P$. Note that all ideals of $A_P$ have the form $A_P\pi^n$ for some $n$ and $A_P^*=A_P \setminus \m_P$. If $\beta \in A_P$ then we know $\beta A_P=A_P \pi^n$ for some $n$. But then we can write $\beta= u \pi^n$ for some $u \in A_P^*$. Then $A_P$ is a local PID and not a field. \qed \\
+
+
+We create a definition from a piece of the proof above. 
+
+\begin{dfn}[Uniformizer]
+Any $\pi \in \m_P$ with $\pi \notin \m_P^2$ is called a uniformizer. 
+\end{dfn} 
+	
+Note that we used that a DVR was Dedekind in the proof of the corollary above. We prove this here.
+
+\begin{prop}
+If $B$ is a DVR, then it is Dedekind. 
+\end{prop}
+
+\pf (Sketch) Suppose $B$ is a DVR (that is a local PID) and not a field. We need show that $B$ is noetherian, integrally closed, and nonzero primes are maximal (and there is a nonzero prime ideal). Now $B$ is a PID so it is certainly noetherian. Further, $B$ is integrally closed as it is a UFD (being a PID). It is trivial in a PID that nonzero primes are maximal. The last fact is also routine to verify. \qed \\
+
+
+We can now return to the proof from the last lecture.
+
+
+\begin{thm}
+If $A$ is a Dedekind ring, $F=\Frac(A)$, $L/F$ is a finite separable extension, $A'$ is the integral closure of $A$ in $L$, and $P=P_1^{e_1}\cdots P_s^{e_s} \in \Spec A$, then
+	\[
+	\sum_{i=1}^s e_if_i = [L:F]=\dim_{A/P}(A'/PA')
+	\]
+\end{thm}
+
+\pf First, we show $\sum_{i=1}^s e_if_i= \dim_{A/P}(A'/PA')$. Let $PA'=P_1^{e_1}\cdots P_s^{e_s}$. We know 
+	\[
+	A' \supseteq P_1 \supseteq P_1^2 \supseteq \cdots \supseteq P_1^{e_1} \supseteq P_1^{e_1}P_2 \supseteq \cdots \supseteq P_1^{e_1}\cdots P_s^{e_s}=PA'
+	\]
+This is a filtration. But this gives a filtration of the quotient. Suppose $I$ is a nonzero ideal of $A'$. We know $P$ is a prime ideal of $A'$. We claim $I/IP$ is a one-dimensional $A'/P$-vector space. Now $A'/P$ acts on $I/IP$ since $I$ is an ideal of $A'$ and if you look at the action of something in $P$, it sends things in $I$ to $IP$. Now $I\neq IP$ as if $I=IP$, since $I$ is nonzero it must be invertible this would imply $A=I^{-1}I=I^{-1}IP$. We also know $I \supseteq J \supseteq IP$, where $J$ is an ideal, then $A \supset I^{-1}J \supseteq P$ ($P$ maximal) implies $I^{-1}J=A$ or $P$. Then $J/IP$ is either 0 or $I/IP$. But then the only $A'$-submodules of the $I/IP$ are 0 or itself, i.e. a simple module for the field $A'/P$. Since $I/IP$ is nonzero, $I/IP$ must be one-dimensional. Therefore, $\dim(A'/P)(I/IP)=\dim_{A'/P} A'/P=1$. If $P=P' \cap A$, where $P'$ is a prime of $A$, then $\dim_{A/P}(A'/P)=f(P'/P)$. Applying this to the filtration above, $\dim_{A/P}(A'/PA')=\sum_{i=1}^s e_i(P_i/P) f_i(P_i/P)$ because each of the stages are one-dimensional over the associated residue field of that prime but the dimension of the residue field of the prime $P_i^{e_i}$ over $A/P$ is the residue field degree of that prime. 
+
+The harder part is to show that $[L:F]=\dim_{A/P}(A'/PA')$. The idea will be to show that it is enough to show this after localizing at $S=A \setminus P$. Then we show $S^{-1}A=A_P$ is local and a PID. Since this is not a field, it must a DVR. Replacing $A$ by $A_P$, then $A'$ is a free $A$-module of rank $[L:F]$ (since it is finitely generated as an $A$-module as it is torsion free over a PID). On the other hand, $L=FA'$ so that the result will then follow after a brief observation. 
+
+Now by clearing denominators, we know that $S^{-1}A'$ is the integral closure of $S^{-1}A=A_P$ inside $L$. We showed that $A/P \cong A_P/\m_P= S^{-1}A/S^{-1}(AP)$, where $\m_P=S^{-1}P$. We have to show that $\dim_{A/P}(A'/PA') = \dim_{A_P/\m_P}(S^{-1}A/S^{-1}PA')$. We have an exact sequence
+	\[
+	0 \ma{} PA' \ma{} A' \ma{} A'/PA' \ma{} 0
+	\]
+But localization is an exact functor so that we have
+	\[
+	0 \ma{} S^{-1}PA' \ma{} S^{-1}A' \ma{} S^{-1}(A'/PA') \ma{} 0
+	\]
+is exact. But every element of $S$ is invertible in $A/P$ so that the map $A'/PA' \to S^{-1}(A'/PA')$ is surjective. Note $A'/pA'$ is a module for $A/P$. If there were a kernel for this map, it would be in $A'/P$ times something annihilated by some nonzero element of $S$. However, $S$ does not interest $P$ so that the map must be injective ($S$ and $P$ generate the unit ideal in $A$). This shows that $\dim_{A/P}(A'/PA') = \dim_{A_P/\m_P}(S^{-1}A/S^{-1}PA')$. Therefore, we can reduce to the case where $A=A_P$, i.e. $A$ is local and a PID, i.e. a DVR. Then $A'$ is finitely generated over $A$, a PID, and is torsion free. But then $A'$ is a free $A$-module. Looking at $L=FA'$, we see $L=F \oplus \cdots \oplus F$, where the number of copies must be $[L:F]$. Finally, $A'/A'P \cong (A/P)^{[L:F]}$ and we get $\dim_{A/P}(A'/A'P)=[L:F]$. \qed \\
+
+
+Now lets look at an example of how to use this theorem and a few examples of DVRs to see why they are worthwhile. 
+
+\begin{lem}
+Suppose $L/F$ is a finite Galois extension and $G=\Gal(L/F)$. Then the prime ideals $P$ of $A'$ over $\underline{P}$ are permuted transitively by $G$. 
+\end{lem}
+
+\pf Suppose this is not the case. We have $\underline{P}A'= Q^{e} \cdot Q_2^{e_2} \cdots Q_s^{e_s}$ with $Q$ a prime ideal not in $\{ \sigma P \colon \sigma \in G\}$ and $e>0,e_i>0$. The Chinese Remainder Theorem gives a $x \in A'$ such that $x \equiv 0 \mod Q$ but $x \equiv 1 \mod \sigma P$ for $\sigma \in G$. Since $L/F$ is a finite Galois extension, the extension is separable and then must be given by $\Nm{L/F}(x)=\prod_{\sigma \in G} \sigma(x) \in A \cap Q=\underline{P}$. But $\sigma^{-1} \equiv \sigma^{-1}(1)=1 \mod P$ for all $\sigma \in G$. Then $\Nm{L/F}(x)= \prod_{\sigma \in G} \sigma^{-1}(x) \equiv 1 \mod P$. Therefore, $\Nm{L/F} \notin P \cap A=\underline{P}$, a contradiction. \qed \\ 
+
+
+This gives a formula for the factorization of prime ideals in a Galois extension. 
+
+
+\begin{cor}
+When $L/F$ is Galois, $\underline{P}A'=(P_1\cdots P_s)^e$,w here $P_1,\ldots,P_s$ are distinct prime ideals and $f=f(P_i/\underline{P})$ is independent of $i$ and $e \cdot f\cdot s=[L:F]$.
+\end{cor}
+
+
+This is because the examine the factorization of $\underline{P}A'$, the Galois group must permute those primes transitively and preserves $\underline{P}A'$. But we want to compute these decompositions explicitly. 
+
+
+\begin{ex}
+Suppose $A'=A[\alpha]$. Examine the irreducible polynomial $f(x)=\text{Irred}(x,\alpha,F) \in A[x]$, which is a monic polynomial with degree the degree of $L/F$, which is the rank of $A[x]$ as a free $A$-module. Reducing this, $\overline{f}(x)= f(x) \mod \underline{P}$ in $(A/\underline{P})[x]$. But $A/\underline{P}$ is a field so we can write $\overline{f}(x)= \overline{P}_1(x)^{e_1} \cdots \overline{P}_r^{e_r}$ for some monic polynomials $\overline{P}_i$ in $A[x]$, where $\overline{P}_i(x)=P_i(x) \mod \underline{P}$. Assume that $\overline{P}_i(x)$ is irreducible in $(A/\underline{P})[x]$. We want to lift these polynomials to monic polynomials of the same degree. The following theorem allows us to do just that.
+\end{ex}
+
+
+\begin{thm}
+If $P_i= \underline{P}A' + \underline{P}_i(\alpha)A'$ is a prime ideal of $A'$ and $A'\underline{P}=P_1^{e_1}\cdots P_s^{e_s}$ is the prime factorization of $A'\underline{P}$, where $f_i=f(P_i/\underline{P})=\deg \overline{P}_i(x)=\deg P_i(x)$.
+\end{thm}
+
+\pf Choose a root $\overline{\alpha}$ of $\overline{P}_i(x)$ in $\overline{(A/\underline{P})}$, the algebraic closure of $A/\underline{P}$. We have a surjection $A' \to (A/\underline{P})[\overline{\alpha}]$ given by $\alpha \mapsto \overline{\alpha}$. Now $\overline{P}_i(x)$ was an irreducible polynomial with coefficients in $A/\underline{P}$. So when looking at the ring generated over $A/\underline{P}$ by $\overline{\alpha}$ inside the algebraic closure, it must be a field. On the other hand, we have a maximal ideal of $A[\alpha]$, say $J \subset \underline{P}A' + \underline{P}_i(\alpha)A'$. Putting this together, we have a diagram
+	\[
+	0 \ma{} J \ma{} A'=A[\alpha] \ma{} (A/\underline{P})[\overline{\alpha}] \ma{} 0
+	\]
+We want to show $J=\underline{P}A' + \underline{P}_i(\alpha)A'$. Suppose $g(\alpha) \in J$ for some $g(x) \in A[\alpha]$. Looking at the reduction $\overline{g}(x) = \equiv g(x) \mod p$, this must have $\overline{\alpha}$ as a root. Since $\overline{\alpha}$ is a root of the irreducible $\overline{P}_i(x)$ in $\overline{A/\underline{P}}$, we get $\overline{g}(x)=\overline{P}_i(x) \cdot \overline{h}(x)$ for some $h(x) \in A[x]$. 
+
+But then $g(\alpha) \in \underline{P}A' + \underline{P}_i(\alpha)A'$. Hence, $g(\alpha) - \underline{P}_i(\alpha)h(\alpha) \in \underline{P}A'$. This shows that $P_i=\underline{P}A' + \underline{P}_i(\alpha)A'$ is a prime ideal of $A'$. Furthermore, it shows $f(P_i/\underline{P})=\dim_{A/\underline{P}}(A/\underline{P}(\overline{\alpha})=\deg \overline{P}_i(x)=\deg \underline{P}_i$. Now $\prod_{i=1}^s P_i^{e_i}= \prod (\underline{P}A' + \underline{P}_i(\alpha)A')^{e_i} \subseteq \underline{P}A'$ since (expanding and noting you always get something in $\underline{P}A'$ except the products of only the `right-most' terms which is) $\prod_{i=1}^s \underline{P}_i(\alpha)^{e_i}= \overline{f(\alpha)} =0$ as $f(\alpha)=0$. But this shows $Q_1^{a_1} \cdots Q_r^{a_r}$ is the factorization of $\underline{P}A'$. We know
+	\[
+	\deg f(x)=\deg\overline{f}(x)=\sum e_i \deg \overline{P}_i(\alpha)=\sum_{i=1}^s e_i f(P_i/\underline{P}) \geq \sum_{j=1}^r a_j f(Q_j/\underline{P}) \stackrel{*}{=}[L:F]=\deg f(x)
+	\]
+where the starred equality follows by the theorem. But then the inequality must be an equality so that $\prod_{i=1}^s P_i^{e_i} = \underline{P}A'$. \qed \\
+
+
+\begin{ex}
+If $f(x)=x^3-x-1$, we know $A'=\cO_L=\Z[\alpha]$ and $A \subseteq \Q=F \subseteq L=\Q(\alpha)$, where $\alpha$ is a root of $f(x)$. Now $x^3-x-1 \in (\Z/2\Z)[x]$ is irreducible (it has no root). So $s=1$ and we can take $P_1(x)=f(x)$. What does this say about the decomposition? It must be $A'\underline{P}= P_1=2 \cO_L+ P_i(\alpha)A'=2 \cO_L$ since $P_i(\alpha)A'=0$.
+\end{ex}
+
+
+\begin{dfn}[Discrete Valuation]
+A discrete valuation on a field $F$ is a surjective function $\nu: F \setminus \{0\} \to \Z$ such that
+	\begin{enumerate}[(i)]
+	\item $\nu(xy)=\nu(x)+\nu(y)$
+	\item $\nu(x+y) \geq \min\{\nu(x),\nu(y)\}$ if $x+y \neq 0$
+	\end{enumerate}
+The valuation ring of $\nu$ is $R_\nu=\{0\} \cup \{\beta \in F \colon \nu(\beta) \geq 0\}$. 
+\end{dfn}
+
+
+Some easy facts about discrete valuations:
+	\begin{enumerate}[1.]
+	\item $R_\nu$ is a DVR.
+	\item $R_\nu^*=\{\beta \in R \colon \nu(\beta)=0\}$
+	\item $\pi$ is a uniformizer in $R_\nu$ if and only if $\nu(\pi)=1$
+	\end{enumerate}
+
+
+\begin{ex}
+Choose $F=k(t) \supseteq k[t]=A$. The $\nu$ arise as either 
+	\begin{enumerate}[(i)]
+	\item $\nu= \text{ord}_{\pi(t)}: F \setminus \{0\} \to \Z$ for some $\pi(t) \in k[t]$ monic irreducible, where $\text{ord}_{\pi(t)}(\beta(t))=m$ if $\beta(t) \in k[t]$ is $\pi(t)^m \cdot u \cdot \prod f$, where $u$ is a unit and the $f$'s are non-associate irreducibles. Note that have made use of unique factorization in a PID.
+	\item $\nu(\beta(t))=\deg \beta(t)$ for $\beta \in k[t]$.
+	\end{enumerate}
+In terms of Algebraic Geometry, the discrete valuations correspond to the equivalence classes of prime ideals in a curve defined by the rational function field, the first is the points over the affine line and the second is the point at infinity. It is non-trivial to check that these are all the valuations. 
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+

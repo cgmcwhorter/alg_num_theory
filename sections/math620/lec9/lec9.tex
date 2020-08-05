@@ -1,3 +1,133 @@
 % !TEX root = ../../../alg_num_theory.tex
+% 10 - 07 - 2009
 \newpage
 \subsection{DVRs, Absolute Values, Completions\label{sec:620_9}}
+
+Recall that a discrete valuation ring is just a local PID $R$, which is not a field, such that $R$ is Dedekind. If $A$ is Dedekind and $\p$ is a nonzero prime ideal, then $(A \setminus \p)^{-1}A=A_\p$, the localization of $A$ at $\p$, is a DVR. We want to generalize this notion: instead of talking about rings, we talk about their fraction fields and valuations on their fraction fields. So we need to discuss valuations on fields. 
+
+\begin{dfn}
+A valuation $\nu$ on a field $F$ is a function $\nu: F \setminus\{0\} \to G$, where $G$ is a totally ordered (additive) abelian group, such that 
+	\begin{enumerate}[(i)]
+	\item $\nu(xy)=\nu(x)+\nu(y)$ 
+	\item $\nu(x+y) \geq \min\{\nu(x),\nu(y)\}$ if $x+y \neq 0$
+	\end{enumerate}
+The valuation ring of $\nu$ is $B_\nu=\{0\} \cup \{b \in F \colon \nu(b) \geq 0\}$ (note this is a ring by the properties above) with a unique maximal ideal $\m_{B_\nu}=\{0\} \cup \{b \in F \colon \nu(b)>0\}$. [Therefore, $B_\nu$ is a local ring with maximal ideal $\m B_\nu$.] We say that $\nu$ is discrete if $G=\Z$ and $\nu$ is surjective. Then $B_\nu$ is a DVR, i.e. a local PID that is not a field. 
+\end{dfn}
+
+We shall see examples where $G \neq \Z$. One question we shall consider is how does one produce all the valuations on a field such that the valuation is discrete. Moreover, what are all the valuations for a given field? How does one produce these valuations? First, we need prove some of the claims in the definition above. It is routine to verify that $B_\nu$ is a ring and that $\m_{B_\nu}$ is an ideal. Let $1$ be the identity of $B$. Then $\nu(1)=\nu(1^2)=\nu(1)+\nu(1)$ so that $\nu(1)=0$ (by subtraction as we are in an abelian group, assuming we treat the operation as addition). We claim that the units of the ring are exactly the elements with valuation 0, i.e $B^*=\{b \in B \colon \nu(b)=0\}$. Certainly if $b \in B$ is a unit, then for some $b' \in B$, $bb'=1$. But $\nu(bb^{-1})=\nu(1)=0$ and $\nu(bb')=\nu(b)+\nu(b')$. Then as $b,b' \in B$, $\nu(b),\nu(b') \neq 0$ so that we must have $\nu(b)=0$. Now if $\beta \in B$ and $\nu(\beta)=0$, then $\nu(1/\beta)= -\nu(\beta)=0$ so that $1/\beta \in B$ and then $\beta \in B^*$. Observe that $B^*= B \setminus \m_{B_\nu}$. Finally if $\nu$ is discrete, choose $\pi \in B$ with $\nu(\pi)=1$ (which exists by surjectivity). Each $0 \neq \beta \in B$ is of the form $u\pi^m$ with $m=\nu(\beta)$, where $u \in B^*=\{b \in F \colon \nu(b)=0\}$. Then $B\beta= B\pi^m$. Each ideal $0 \neq I$ of $B$ is $B \pi^l$, where $l=\min\{ \nu(\beta) \colon 0 \neq \beta \in I\}$. 
+
+
+\begin{prop}
+If $A$ is a DVR, then $A$ is a valuation ring of $F=\Frac A$.  
+\end{prop}
+
+\pf (Sketch) Let $\nu: F \setminus \{0\} \to \Z$ be given by $\nu(\beta):= \ord_\p(A\beta)$, where $A\beta$ is the fractional $A$-ideal of $F$ which is $\p^{\ord_\p(A\beta)}$ times the product of integral powers of other primes of $A$. \qed \\
+
+Notice this gives a way of producing discrete valuation rings. In fact if you take any prime ideal in any Dedekind ring, the same construction gives you a discrete valuation ring. Given a Dedekind ring, we will want to characterize those valuations of the fraction field which come about from prime ideals of the ring. But first, we shall see an example of a non-discrete valuation. 
+
+\begin{ex}
+Let $k$ be a field and let $R=k[x,y]$. Take $G= \Z \times \Z=\{(m,n) \colon m,n \in \Z\}$ with the lexicographic ordering: $(m,n) \leq (m',n')$ if and only if $m<m'$ or $m=m'$ and $n \leq n'$. Define $\nu: R \to G$ via $x^ny^m \mapsto (m,n)$ and extend to $R$ via $\nu(\sum_{m,n \geq 0} x^my^n)=\min_{a_{m,n} \neq 0} \{(m,n) \in G\}$. Extend to the fraction field $F=\Frac R=k(x,y)$ by $\nu(f/h)= \nu(f) - \nu(h)$. 
+\end{ex}
+
+Now given a field $F$, how to all the discrete valuations arise? When the field is the fraction field of a Dedekind ring, there is a `nice' description. 
+
+\begin{thm}
+Suppose that $A$ is a Dedekind ring and $F=\Frac A$. There is a bijection
+	\[
+	\begin{tikzcd}
+	\left\{ \p \; \colon \; \begin{array}{@{}c@{}} \p \text{ nonzero prime} \\ \text{ideal of }A \end{array} \right\} \arrow[leftrightarrow]{r} &  \left\{ \nu: F^\times \to \Z \; \colon \; \begin{array}{@{}c@{}} \nu \text{ is a discrete valuation,} \\ \nu(A \setminus\{0\}) \subseteq \Z_{\geq 0} \\ \nu(\beta) \geq 0 \text{ for } \beta \in A\setminus\{0\}\end{array} \right\}
+	\end{tikzcd}
+	\]
+The correspondence is given by
+	\[
+	\begin{tikzcd}
+	\p \arrow[mapsto]{r} & \nu=\nu_\p \colon \nu_\p(\beta)= \ord_\p(A\beta) \text{ for } \beta \in F^\times \\
+	A \cap \m_{B_\nu}= \p(v)=\{\beta \in A \colon \nu(\beta)>0\} \cup \{0\} & \nu \arrow[mapsto]{l}
+	\end{tikzcd}
+	\]
+\end{thm}
+
+Of course, one could think about $A=\{ \beta \in A \colon \nu(\beta)>0\} \cup \{0\}$ as $A=\p(\nu):= A \cap \m_{\beta_\nu}$. By the theorem, the prime ideals of the Dedekind ring can be found via valuations on the fraction field of the form in the theorem. Furthermore given a field $F$, to find discrete valuations on $F$ one can look at Dedekind subrings for which $F$ is the fraction field.
+
+
+\begin{ex}
+Let $A=\Z$ and $F+\Q$. If $\nu: F \setminus\{0\} \to \Z$ is a discrete valuation, then $\nu(1)=0$. ($2\nu(1)=\nu(1^2)=\nu(1)$). For $0< \beta \in \Z$, then $\beta=1+1+\cdots+1$ so that $\nu(\beta) \geq 0$. We know also $(-1)^2=1$ so that $\nu(-1)=0$. But then $\nu(-\beta) \geq 0$. Therefore, $\nu(\beta) \geq 0$ if $0 \neq \beta \in \Z$. The theorem says that the discrete valuations of $\Q$ all have the form $\ord_{p\Z}$ for some prime $p$.
+\end{ex}
+
+\begin{ex}
+Let $k$ be a field and define $A=k[t] \subseteq F=k(t)$. Suppose $\nu$ is a discrete valuation of $F$ and $\nu(\alpha)=0$ if $\alpha \in k \setminus \{0\}$. If $\nu(t) \geq 0$, then $\nu(\sum_{i=0}^s a_it^i) \geq 0$. Then $\nu(\beta) \geq 0$ if $0 \neq \beta \in k[t]$. Similarly, if $\nu(t) \leq 0$, then $\nu(\beta) \geq 0$ if $0 \neq \beta \in k[t^{-1}]$. The theorem then says that looking at the valuations that are 0 on the constants, then you can take the ring to be either $k[t]$ or $k[t^{-1}]$ and then the valuation came from a prime ideal of $A$ or $A'$. Therefore, all the discrete valuations $\nu$ of $F$ with $\nu(\alpha)=0$ if $0 \neq \alpha \in k$ are of the form $\ord_\p$ or $\ord_{\p'}$ for a prime $\p$ of $k[t]$ or a prime $\p'$ of $k[t^{-1}]$. This leads to a bijection between valuations $\nu$ of $F$ with $\nu(k \setminus \{0\})=0$ and points $[\p]$ of the curve $C_F$ associated to $F$.
+	\[
+	\begin{tikzcd}
+	\left\{ \begin{array}{@{}c@{}} \text{discrete valuations }\nu \text{ of} \\ F \text{ with } \nu(k\setminus\{0\})=0.\end{array} \right\} \arrow[leftrightarrow]{r} &  \left\{ \begin{array}{@{}c@{}} \text{points }[\p] \text{ of }C_F \text{ associated}\\ \text{to }\p, \text{ a nonzero prime} \\ \text{ideal of Dedekind} \\ A \subseteq F \text{ with } \Frac(A)=F \\ \text{and }A \text{ a }k\text{-algebra}.\end{array} \right\}
+	\end{tikzcd}
+	\]
+So we have Dedekind subrings of $F$ which are $k$-algebras, inside of which we have various prime ideals $\p$. We identify these ideals if they come about from a prime in the subring generated by the product. Meaning given $\p \subseteq A$ and $\p' \subseteq A'$, one looks at the ring they generate $AA'$, which is also Dedekind, and if there is a prime $\fQ \subseteq AA'$ with $\fQ \cap A=\p$ and $\fQ \cap A'=\p'$, then we identify $\p$ and $\p'$. Then the valuation given by $\fQ$ is the same as the one given by $\p$ and $\p'$. Geometrically, we are talking about closed points on the curve $C_F$. The same ideals give the correspondence above whenever $F$ is a finite of transcendence degree 1 over $k$.
+	\[
+	\begin{tikzcd}
+	 & \fQ \subseteq AA' \arrow[dash]{dl} \arrow[dash]{dr} & \\
+	\p \subseteq A & & A' \supseteq \p
+	\end{tikzcd}
+	\]
+\end{ex}
+
+\begin{rem}
+Note that $\nu(1)=0$, always. However, if $b,b' \in A$ and $bb'=1$, then $0=\nu(1)=\nu(b)+\nu(b')$. If one does not assume $\nu \geq 0$ on $A$, then there is no reason to say that the units in $A$ have valuation 0. As an example, take $k=l(x)$ for some field $l$. We can construct a discrete valuation on $k$ by defining $\nu: k \setminus\{0\} \to 0$ to be $\ord_x$, where $l[x] \cdot x$ is a prime ideal of $l[x]$. Now $l[x]$ is a Dedekind subring of $k$ whose fraction field is $k$. In particular, one can discuss the valuation on $k$ coming from this prime ideal. Look at $F=k(y)$. Extend $\nu$ to $\nu: F \setminus \{0\} \to 0$ by $\nu(y)=0$. Now $\nu$ is a discrete valuation on $F$ that is nontrivial on $k$. This comes from $F=k(y)(x)$. Then $\nu$ is a valuation on $F$ with $\nu(\alpha)=0$ if $\alpha \in k(y) \setminus \{0\}$ and $\nu(x)=1$. Note that $F$ has transcendence degree 1 over $k$. 
+\end{rem}
+
+
+\begin{ex}
+Suppose $R$ is any UFD and let $\pi \in R$ be an irreducible. We have a discrete valuation $\nu_\pi: \Frac R \setminus \{0\} \to \Z$ given by $\nu_\pi = \ord_\pi(\beta)$ for $\beta \in \Frac R$. However, this does not produce all possible discrete valuations on $R$. This produces a map
+	\[
+	\begin{tikzcd}
+	\left\{ \begin{array}{@{}c@{}} \text{irreducible elements} \\ \pi \in R, \\ \text{up to mult. by unit.} \end{array} \right\} \arrow{r} &  \left\{ \begin{array}{@{}c@{}} \text{discrete valuations} \\ \text{of }F=\Frac R.\end{array} \right\}
+	\end{tikzcd}
+	\]
+This map is surjective if $R=\Z$. But even for polynomials in one variable, this map fails to be surjective. Generally, this map is rarely surjective. For example, take $R=k[x,y]$. We have $\Frac(R)=k(x,y)$. Note that $R \subseteq R':= k[x/y,y]$ and $\Frac(R')=k(x,y)$. 
+\end{ex}
+
+
+49:12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
